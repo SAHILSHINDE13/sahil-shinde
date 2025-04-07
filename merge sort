@@ -1,0 +1,63 @@
+def merge_sort(arr):
+    if len(arr) > 1:
+        # Split the array into two halves
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+        
+        # Recursively sort both halves
+        merge_sort(left_half)
+        merge_sort(right_half)
+        
+        # Merge the sorted halves
+        i = j = k = 0
+        
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+        
+        # Copy any remaining elements
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+        
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+
+# Example usage matching the exact steps from Figure 1
+if __name__ == "__main__":
+    original_array = [5, 8, 4, 10, 9, 1, 3, 2]
+    print("Original array:", original_array)
+    
+    # Showing the splitting process as in Figure 1
+    print("\nSplitting process:")
+    print("584109132 → 58410 | 9132")
+    print("58410 → 58 | 410")
+    print("58 → 5 | 8")
+    print("410 → 4 | 10")
+    print("9132 → 91 | 32")
+    print("91 → 9 | 1")
+    print("32 → 3 | 2")
+    
+    # Perform the merge sort
+    merge_sort(original_array)
+    
+    # Showing the merging process as in Figure 1
+    print("\nMerging process:")
+    print("5 | 8 → 58")
+    print("4 | 10 → 410")
+    print("58 | 410 → 45810")
+    print("9 | 1 → 19")
+    print("3 | 2 → 23")
+    print("19 | 23 → 1239")
+    print("45810 | 1239 → 123458910")
+    
+    print("\nSorted array:", original_array)
